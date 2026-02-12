@@ -48,27 +48,27 @@ function App() {
   };
 
   const buttons = [
-    '(', ')', 'C', 'DEL',
-    'sin(', 'cos(', 'tan(', '/',
-    '7', '8', '9', '*',
-    '4', '5', '6', '-',
-    '1', '2', '3', '+',
-    '0', '.', 'log(', '=',
-    'pi', 'e', 'sqrt(', '^'
+    'sin(', 'cos(', 'tan(', 'log(', 'ln(',
+    '(', ')', 'mod', 'pi', 'e',
+    '7', '8', '9', '/', 'sqrt(',
+    '4', '5', '6', '*', '^',
+    '1', '2', '3', '-', 'abs(',
+    '0', '.', 'DEL', '+', '!',
+    'C', 'exp(', '=',
   ];
 
   return (
     <div className="container">
       <div className="calculator">
         <div className="header">
-          <h2>Scientific</h2>
-          <button className="theme-toggle" onClick={toggleTheme}>
+          <h2 style={{margin: 0}}>Scientific Calculator</h2>
+          <button className="theme-toggle" onClick={toggleTheme} title="Toggle Theme">
             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
           </button>
         </div>
         
         <div className="display">
-          <div className="expression">{expression}</div>
+          <div className="expression">{expression || '\u00A0'}</div>
           <div className="result">{result}</div>
         </div>
 
@@ -77,9 +77,10 @@ function App() {
             <button
               key={btn}
               onClick={() => handleButtonClick(btn)}
-              className={btn === '=' ? 'operator' : ''}
+              className={btn === '=' ? 'operator' : (['C', 'DEL'].includes(btn) ? 'operator' : '')}
+              style={btn === '=' ? {gridColumn: 'span 3'} : {}}
             >
-              {btn}
+              {btn.replace('(', '')}
             </button>
           ))}
         </div>
