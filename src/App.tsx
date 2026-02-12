@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { evaluate } from 'mathjs';
 import { Sun, Moon, RotateCcw } from 'lucide-react';
 import './App.css';
@@ -18,9 +18,10 @@ function App() {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  const handleButtonClick = (value: string) => {
+  const handleButtonClick = useCallback((value: string) => {
     if (value === '=') {
       try {
+        if (!expression) return;
         const evalResult = evaluate(expression).toString();
         setResult(evalResult);
         const newHistory = [{ expression, result: evalResult }, ...history].slice(0, 5);
@@ -36,7 +37,21 @@ function App() {
     } else {
       setExpression(prev => prev + value);
     }
-  };
+  }, [expression, history]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key >= '0' && e.key <= '9') handleButtonClick(e.key);
+      if (['+', '-', '*', '/', '.', '(', ')'].includes(e.key)) handleButtonClick(e.key);
+      if (e.key === 'Enter') handleButtonClick('=');
+      if (e.key === 'Backspace') handleButtonClick('DEL');
+      if (e.key === 'Escape') handleButtonClick('C');
+      if (e.key === '^') handleButtonClick('^');
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleButtonClick]);
 
   const toggleTheme = () => {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
@@ -56,6 +71,11 @@ function App() {
     '0', '.', 'DEL', '+', '!',
     'C', 'exp(', '=',
   ];
+
+  const formatBtnText = (btn: string) => {
+    if (btn.endsWith('(') && btn.length > 1) return btn.replace('(', '');
+    return btn;
+  };
 
   return (
     <div className="container">
@@ -80,7 +100,7 @@ function App() {
               className={btn === '=' ? 'operator' : (['C', 'DEL'].includes(btn) ? 'operator' : '')}
               style={btn === '=' ? {gridColumn: 'span 3'} : {}}
             >
-              {btn.replace('(', '')}
+              {formatBtnText(btn)}
             </button>
           ))}
         </div>
