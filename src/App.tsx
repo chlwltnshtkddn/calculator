@@ -33,22 +33,34 @@ function App() {
     if (value === '=') {
       try {
         if (!expression) return;
-        let balancedExpr = expression;
-        const openBrackets = (balancedExpr.match(/\(/g) || []).length;
-        const closeBrackets = (balancedExpr.match(/\)/g) || []).length;
-        if (openBrackets > closeBrackets) balancedExpr += ')'.repeat(openBrackets - closeBrackets);
-        const evalResult = evaluate(balancedExpr).toString();
+        
+        // Replace visual operators with mathjs compatible ones
+        let processedExpr = expression
+          .replace(/mod/g, '%')
+          .replace(/ln\(/g, 'log(') // mathjs use log() for natural logarithm
+          .replace(/log\(/g, 'log10('); // mathjs use log10() for base 10
+        
+        const openBrackets = (processedExpr.match(/\(/g) || []).length;
+        const closeBrackets = (processedExpr.match(/\)/g) || []).length;
+        if (openBrackets > closeBrackets) processedExpr += ')'.repeat(openBrackets - closeBrackets);
+        
+        const evalResult = evaluate(processedExpr).toString();
         setResult(evalResult);
-        setHistory(prev => [{ expression: balancedExpr, result: evalResult }, ...prev].slice(0, 5));
+        setHistory(prev => [{ expression: expression, result: evalResult }, ...prev].slice(0, 5));
         setExpression(evalResult);
-      } catch (error) { setResult('Error'); }
+      } catch (error) { 
+        console.error(error);
+        setResult('Error'); 
+      }
     } else if (value === 'C') {
       setExpression('');
       setResult('0');
     } else if (value === 'DEL') {
       setExpression(prev => prev.slice(0, -1));
     } else {
-      setExpression(prev => prev + value);
+      // Add spaces around mod for better readability and parsing
+      const displayValue = value === 'mod' ? ' mod ' : value;
+      setExpression(prev => prev + displayValue);
     }
     if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
   }, [expression]);
