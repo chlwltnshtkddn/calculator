@@ -11,6 +11,7 @@
   --history-bg: #ffffff;
   --nav-bg: #ffffff;
   --accent-color: #339af0;
+  --footer-text: #868e96;
 }
 
 [data-theme='dark'] {
@@ -39,6 +40,9 @@ body {
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 nav {
@@ -58,7 +62,7 @@ nav {
   color: var(--text-color);
   font-size: 1rem;
   font-weight: 600;
-  margin: 0 10px;
+  margin: 0 5px;
   cursor: pointer;
   padding: 8px 15px;
   border-radius: 6px;
@@ -75,6 +79,7 @@ nav {
   gap: 30px;
   flex-wrap: wrap;
   justify-content: center;
+  flex: 1;
 }
 
 .main-content {
@@ -126,38 +131,17 @@ button {
 button:hover { background-color: var(--button-hover); }
 button.operator { background-color: var(--op-button-bg); color: white; }
 
-/* Compound Interest Styles */
-.compound-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.input-group label { font-weight: 600; font-size: 0.9rem; }
-.input-group input {
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid var(--button-hover);
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-size: 1.1rem;
-}
-
 .info-section {
   margin-top: 40px;
-  padding: 30px;
+  padding: 35px;
   background-color: var(--calculator-bg);
   border-radius: 20px;
-  line-height: 1.7;
+  line-height: 1.8;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
-.info-section h3 { margin-top: 0; color: var(--accent-color); }
+.info-section h3 { margin-top: 0; color: var(--accent-color); font-size: 1.5rem; }
+.info-section p { margin-bottom: 1.2rem; }
 
 .history {
   width: 280px;
@@ -166,6 +150,41 @@ button.operator { background-color: var(--op-button-bg); color: white; }
   border-radius: 20px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
+
+footer {
+  margin-top: 50px;
+  padding: 40px 20px;
+  border-top: 1px solid var(--button-bg);
+  text-align: center;
+  color: var(--footer-text);
+}
+
+.footer-links {
+  margin-bottom: 20px;
+}
+
+.footer-links button {
+  background: none;
+  border: none;
+  color: var(--accent-color);
+  margin: 0 10px;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.footer-links button:hover {
+  text-decoration: underline;
+}
+
+.legal-content {
+  background-color: var(--calculator-bg);
+  padding: 40px;
+  border-radius: 24px;
+  line-height: 1.8;
+  text-align: left;
+}
+
+.legal-content h2 { color: var(--accent-color); }
 
 @media (max-width: 800px) {
   .container { flex-direction: column; align-items: center; }
