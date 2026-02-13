@@ -172,9 +172,11 @@ button.operator {
 
 .content-grid {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  grid-template-columns: minmax(0, 2fr) 320px;
   align-items: start;
   gap: 24px;
+  margin: 0;
+}
 }
 
 .info-section {
@@ -367,4 +369,23 @@ thead th {
 
 .info-section {
   grid-column: 1 / -1;
+  margin: 0;
+  width: 100%;
+}
+
+.history {
+  width: 100%;
+  min-width: 320px;
+}
+
+.history-item {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.calculator,
+.history,
+.info-section,
+.legal-content {
+  width: 100%;
 }
