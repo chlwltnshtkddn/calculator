@@ -269,10 +269,12 @@ function App() {
                   공학용 계산기와 복리 이자 시뮬레이터를 함께 제공하는 유틸리티 페이지입니다. 교육용 및 일상 계획 수립을 위해 만들었고,
                   실무 판단 전에는 꼭 실제 값 검증이 필요합니다.
                 </p>
-                <h4>사용 방법</h4>
+                <h4>주요 사용 시나리오</h4>
                 <ul>
-                  <li>sin, cos, tan, log, ln, sqrt, exp 등 과학함수를 사용할 수 있습니다.</li>
-                  <li>복리 페이지에서 초기 금액·기간·이율을 입력하면 예상 수익을 확인할 수 있습니다.</li>
+                  <li>공학 함수가 필요한 과제 계산식(각도 변환, 로그, 제곱근, 지수)을 빠르게 확인합니다.</li>
+                  <li>복리 계산에서 초기 금액·기간·일일 이율을 넣어 자산 성장 시나리오를 점검합니다.</li>
+                  <li>복리 결과를 바탕으로 보수적 수익률 가정치를 다시 세팅할 수 있습니다.</li>
+                  <li>주식 투자 상황을 가정해 보수/공격형 수익 가정별 성장 차이를 비교합니다.</li>
                   <li>계산은 브라우저 내부에서만 수행되며 입력값은 서버로 전송되지 않습니다.</li>
                 </ul>
               </section>
@@ -282,6 +284,9 @@ function App() {
           {view === 'compound' && (
             <section className='calculator compound-wrap'>
               <h2>복리 계산</h2>
+              <p className='hint' style={{ marginTop: 0, marginBottom: 12 }}>
+                주식 투자 판단 보조용으로, 확정 수익률이 아니라 가정 기반 성장치만 비교해 줍니다.
+              </p>
               <div className='compound-form'>
                 <label>
                   초기 금액
@@ -323,6 +328,29 @@ function App() {
                   </div>
                 </div>
               </div>
+              <div className='card-grid' style={{ marginTop: 18 }}>
+                <article className='policy-card'>
+                  <h3>주식 투자 사용 시나리오</h3>
+                  <p>
+                    예를 들어, 1,000,000원에서 시작해 하루 0.25%의 목표 수익률을 60일 적용하면
+                    자산 성장 흐름을 빠르게 비교할 수 있습니다. 목표 구간을 바꾸면 결과 곡선이 어떻게 달라지는지도 확인할 수 있습니다.
+                  </p>
+                </article>
+                <article className='policy-card'>
+                  <h3>주의</h3>
+                  <p>
+                    실제 주가 수익률은 이 값과 다르게 움직일 수 있습니다. 수수료, 세금, 실제 거래 타이밍이 반영되지 않으므로
+                    투자 판단은 별도로 점검해야 합니다. 본 계산기는 참고용 도구입니다.
+                  </p>
+                </article>
+                <article className='policy-card'>
+                  <h3>입력 팁</h3>
+                  <p>
+                    초기 금액은 정수만 입력되며, 기간과 이율을 조정해 보수/공격형 시나리오를 나눠 실험하면
+                    비교 판단이 더 명확해집니다.
+                  </p>
+                </article>
+              </div>
               {compoundResult.table.length > 0 && (
                 <div className='result-table-container'>
                   <table>
@@ -352,21 +380,21 @@ function App() {
             <section className='legal-content'>
               <h2>소개</h2>
               <p>
-                Calculator EAC는 계산 편의성과 가독성을 높인 공학용 계산기/복리 시뮬레이터를 제공합니다. 기능은 가볍고 투명하게
-                운영되도록 설계했습니다.
+                Calculator EAC는 공학 계산기와 복리 계산을 한 페이지에서 함께 제공하는 계산 유틸리티 페이지입니다.
+                단발성 계산기를 넘어서, 사용 목적별 가이드를 함께 제공해 지속적으로 참고할 수 있는 형태로 운영됩니다.
               </p>
               <div className='card-grid'>
                 <article className='policy-card'>
                   <h3>서비스 목적</h3>
-                  <p>학습과 개인 분석, 재무 관련 계산을 위한 실용 도구를 제공합니다.</p>
+                  <p>공학 계산, 투자 가정 시뮬레이션, 자산 추정 등 실무에 가까운 계산 흐름을 빠르게 제공하는 것입니다.</p>
                 </article>
                 <article className='policy-card'>
-                  <h3>콘텐츠 정책</h3>
-                  <p>타사 콘텐츠 복제 없이 자체 작성한 설명을 사용하고, 출력은 입력값 기반으로만 생성됩니다.</p>
+                  <h3>제공 콘텐츠</h3>
+                  <p>사용 가이드, 입력 예시, 시나리오 해석, 자주 묻는 질문으로 페이지별 이해도를 높였습니다.</p>
                 </article>
                 <article className='policy-card'>
                   <h3>운영 정책</h3>
-                  <p>오차/오해 소지가 있는 부분은 반영 주기적으로 수정하고 공지합니다.</p>
+                  <p>콘텐츠 품질을 기준으로 지속 보완하고, 계산 방식의 오해 가능성이 큰 항목은 추가 설명을 붙입니다.</p>
                 </article>
               </div>
             </section>
