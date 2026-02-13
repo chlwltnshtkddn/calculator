@@ -449,7 +449,7 @@ function App() {
         </div>
         <p>© {currentYear} Calculator EAC. All rights reserved.</p>
         <p style={{ fontSize: '0.8rem', marginTop: 8 }}>
-          본 페이지는 Google 정책 검토가 완료되면 광고를 안정적으로 노출합니다. 현재는 승인 전 상태이므로 광고가 표시되지 않습니다.
+          본 페이지는 운영 정책 준수와 신뢰 가능한 계산 결과 제공을 최우선으로 운영됩니다.
         </p>
       </footer>
     </div>
