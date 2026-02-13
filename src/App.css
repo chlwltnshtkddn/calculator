@@ -176,7 +176,8 @@ button.operator {
 
 .content-grid {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  align-items: start;
   gap: 24px;
 }
 
@@ -184,14 +185,25 @@ button.operator {
   padding: 35px;
   background-color: var(--calculator-bg);
   border-radius: 20px;
-  line-height: 1.8;
+  line-height: 1.95;
+  font-size: 1.05rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .info-section h3 {
   margin-top: 0;
   color: var(--accent-color);
-  font-size: 1.5rem;
+  font-size: 1.7rem;
+}
+
+.info-section p,
+.info-section li {
+  color: var(--text-color);
+  opacity: 0.95;
+}
+
+.info-section h4 {
+  font-size: 1.2rem;
 }
 
 .info-section p {
