@@ -95,10 +95,6 @@ body {
 }
 
 .container {
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
-  justify-content: center;
   flex: 1;
 }
 
@@ -176,7 +172,7 @@ button.operator {
 
 .content-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
   align-items: start;
   gap: 24px;
 }
@@ -281,7 +277,7 @@ thead th {
 }
 
 .history {
-  width: 280px;
+  width: 100%;
   background-color: var(--history-bg);
   padding: 20px;
   border-radius: 20px;
@@ -341,11 +337,6 @@ thead th {
 }
 
 @media (max-width: 800px) {
-  .container {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
   .history {
     width: 100%;
   }
@@ -372,4 +363,8 @@ thead th {
   .footer-links button {
     margin: 6px;
   }
+}
+
+.info-section {
+  grid-column: 1 / -1;
 }
